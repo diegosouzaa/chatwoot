@@ -273,7 +273,8 @@
     "FILE_BUBBLE": {
       "DOWNLOAD": "下载",
       "UPLOADING": "上传中...",
-      "INSTAGRAM_STORY_UNAVAILABLE": "本信息不存在"
+      "INSTAGRAM_STORY_UNAVAILABLE": "本信息不存在",
+      "INSTAGRAM_STORY_REPLY": "回复您的故事:"
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "在地图上查看"
