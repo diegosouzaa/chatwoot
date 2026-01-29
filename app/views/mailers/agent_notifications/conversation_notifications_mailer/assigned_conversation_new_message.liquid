@@ -1,6 +1,6 @@
 <p>Hi {{user.available_name}},</p>
 
-<p>You have received a new message in your assigned conversation [ID - {{conversation.display_id}}].</p>
+<p>You have received a new message in your assigned conversation.</p>
 
 {% if message %}
   <p><b>{{message.sender_display_name}}</b> wrote:</p>
@@ -24,6 +24,5 @@
   <p>Message content not available</p>
 {% endif %}
 
-<p>
-  <a href="{{action_url}}">View conversation</a>
-</p>
+Click <a href="{{action_url}}">here</a> to get cracking.
+
