@@ -273,7 +273,8 @@
     "FILE_BUBBLE": {
       "DOWNLOAD": "Parsisiųsti",
       "UPLOADING": "Įkeliama...",
-      "INSTAGRAM_STORY_UNAVAILABLE": "Šis pasakojimas nebepasiekiamas."
+      "INSTAGRAM_STORY_UNAVAILABLE": "Šis pasakojimas nebepasiekiamas.",
+      "INSTAGRAM_STORY_REPLY": "Atsakė į tavo pasakojimą:"
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "Pamatyti žemėlapyje"
