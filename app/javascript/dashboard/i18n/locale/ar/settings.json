@@ -273,7 +273,8 @@
     "FILE_BUBBLE": {
       "DOWNLOAD": "تنزيل",
       "UPLOADING": "جاري الرفع...",
-      "INSTAGRAM_STORY_UNAVAILABLE": "هذه القصة لم تعد متاحة."
+      "INSTAGRAM_STORY_UNAVAILABLE": "هذه القصة لم تعد متاحة.",
+      "INSTAGRAM_STORY_REPLY": "رد على قصتك:"
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "مشاهدة على الخريطة"
