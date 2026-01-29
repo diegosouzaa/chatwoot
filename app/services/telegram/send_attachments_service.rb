@@ -1,3 +1,5 @@
+require 'faraday/multipart'
+
 # Telegram Attachment APIs: ref: https://core.telegram.org/bots/api#inputfile
 
 # Media attachments like photos, videos can be clubbed together and sent as a media group
