@@ -273,7 +273,8 @@
     "FILE_BUBBLE": {
       "DOWNLOAD": "Descarrega",
       "UPLOADING": "S'està carregant...",
-      "INSTAGRAM_STORY_UNAVAILABLE": "Aquesta història ja no està disponible."
+      "INSTAGRAM_STORY_UNAVAILABLE": "Aquesta història ja no està disponible.",
+      "INSTAGRAM_STORY_REPLY": "Va respondre a la teva història:"
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "Veure al mapa"
