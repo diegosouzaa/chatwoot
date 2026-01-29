@@ -8,8 +8,6 @@ class Notification::EmailNotificationService
     return if notification.user.confirmed_at.nil?
     return unless user_subscribed_to_notification?
 
-    # don't send emails for failed messages
-
     # TODO : Clean up whatever happening over here
     # Segregate the mailers properly
     AgentNotifications::ConversationNotificationsMailer.with(account: notification.account).public_send(notification
