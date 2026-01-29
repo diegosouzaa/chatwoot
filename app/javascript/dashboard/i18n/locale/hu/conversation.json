@@ -61,6 +61,7 @@
     "UNSUPPORTED_MESSAGE": "This message is unsupported. You can view this message on the Facebook / Instagram app.",
     "UNSUPPORTED_MESSAGE_FACEBOOK": "Ez az üzenet nem támogatott. Ezt az üzenetet a Facebook Messenger alkalmazásban tekintheti meg.",
     "UNSUPPORTED_MESSAGE_INSTAGRAM": "Ez az üzenet nem támogatott. Ezt az üzenetet az Instagram alkalmazásban tekintheti meg.",
+    "UNSUPPORTED_MESSAGE_TIKTOK": "This message is unsupported. You can view this message on the TikTok app.",
     "SUCCESS_DELETE_MESSAGE": "Üzenet törölve",
     "FAIL_DELETE_MESSSAGE": "Nem tudtad törölni az üzenetet! Próbáld újra",
     "NO_RESPONSE": "Nincs válasz",
