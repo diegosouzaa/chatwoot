@@ -273,7 +273,8 @@
     "FILE_BUBBLE": {
       "DOWNLOAD": "Descărcare",
       "UPLOADING": "Încărcare...",
-      "INSTAGRAM_STORY_UNAVAILABLE": "Această poveste nu mai este disponibilă."
+      "INSTAGRAM_STORY_UNAVAILABLE": "Această poveste nu mai este disponibilă.",
+      "INSTAGRAM_STORY_REPLY": "A răspuns la povestea ta:"
     },
     "LOCATION_BUBBLE": {
       "SEE_ON_MAP": "Vezi pe hartă"
