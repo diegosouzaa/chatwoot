@@ -61,6 +61,7 @@
     "UNSUPPORTED_MESSAGE": "This message is unsupported. You can view this message on the Facebook / Instagram app.",
     "UNSUPPORTED_MESSAGE_FACEBOOK": "این پیام پشتیبانی نمی شود. می توانید این پیام را در برنامه فیس بوک مسنجر مشاهده کنید.",
     "UNSUPPORTED_MESSAGE_INSTAGRAM": "این پیام پشتیبانی نمی شود. می توانید این پیام را در برنامه اینستاگرام مشاهده کنید.",
+    "UNSUPPORTED_MESSAGE_TIKTOK": "This message is unsupported. You can view this message on the TikTok app.",
     "SUCCESS_DELETE_MESSAGE": "پیام با موفقیت حذف شد",
     "FAIL_DELETE_MESSSAGE": "پیام حذف نشد! دوباره امتحان کنید",
     "NO_RESPONSE": "بدون پاسخ",
