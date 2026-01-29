@@ -61,6 +61,7 @@
     "UNSUPPORTED_MESSAGE": "このメッセージはサポートされていません。Facebook / Instagram で表示できます。",
     "UNSUPPORTED_MESSAGE_FACEBOOK": "このメッセージはサポートされていません。Facebook Messengerでこのメッセージを表示できます。",
     "UNSUPPORTED_MESSAGE_INSTAGRAM": "このメッセージはサポートされていません。このメッセージは Instagram で表示できます。",
+    "UNSUPPORTED_MESSAGE_TIKTOK": "This message is unsupported. You can view this message on the TikTok app.",
     "SUCCESS_DELETE_MESSAGE": "メッセージの削除に成功",
     "FAIL_DELETE_MESSSAGE": "メッセージを削除できませんでした！もう一度お試しください",
     "NO_RESPONSE": "返信なし",
