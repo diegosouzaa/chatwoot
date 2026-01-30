@@ -12,6 +12,7 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(conversation)
+    return unless @account.active?
     return if conversation_already_viewed?
 
     recap_messages = @conversation.messages.chat.where('id < ?', last_queued_id).last(10)
@@ -25,6 +26,7 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(conversation)
+    return unless @account.active?
     return if conversation_already_viewed?
 
     @messages = @conversation.messages.chat.where(message_type: [:outgoing, :template]).where('id >= ?', last_queued_id)
@@ -38,6 +40,8 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(message.conversation)
+    return unless @account.active?
+
     @message = message
     prepare_mail(true)
   end
@@ -46,6 +50,7 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(conversation)
+    return unless @account.active?
 
     @messages = @conversation.messages.chat.select(&:conversation_transcriptable?)
 

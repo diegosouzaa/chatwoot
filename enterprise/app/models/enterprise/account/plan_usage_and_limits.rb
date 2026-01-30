@@ -32,6 +32,18 @@ module Enterprise::Account::PlanUsageAndLimits
     save
   end
 
+  def email_rate_limit
+    # Per-account override takes priority
+    return self[:limits]['emails'].to_i if self[:limits]['emails'].present?
+
+    # Enterprise plan-based limit
+    plan_limit = plan_email_limit
+    return plan_limit if plan_limit.present?
+
+    # Fall through to OSS: GlobalConfig → ChatwootApp.max_limit
+    super
+  end
+
   def subscribed_features
     plan_features = InstallationConfig.find_by(name: 'CHATWOOT_CLOUD_PLAN_FEATURES')&.value
     return [] if plan_features.blank?
@@ -66,6 +78,16 @@ module Enterprise::Account::PlanUsageAndLimits
       current_available: (total_count - consumed).clamp(0, total_count),
       consumed: consumed
     }
+  end
+
+  def plan_email_limit
+    config = InstallationConfig.find_by(name: 'ACCOUNT_EMAILS_PLAN_LIMITS')&.value
+    return nil if config.blank? || plan_name.blank?
+
+    parsed = config.is_a?(String) ? JSON.parse(config) : config
+    parsed[plan_name.downcase]&.to_i
+  rescue StandardError
+    nil
   end
 
   def default_captain_limits
@@ -119,7 +141,8 @@ module Enterprise::Account::PlanUsageAndLimits
         'inboxes' => { 'type': 'number' },
         'agents' => { 'type': 'number' },
         'captain_responses' => { 'type': 'number' },
-        'captain_documents' => { 'type': 'number' }
+        'captain_documents' => { 'type': 'number' },
+        'emails' => { 'type': 'number' }
       },
       'required' => [],
       'additionalProperties' => false
