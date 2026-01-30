@@ -62,6 +62,11 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
     render json: bot_metrics
   end
 
+  def outgoing_messages_count
+    builder = V2::Reports::OutgoingMessagesCountBuilder.new(Current.account, outgoing_messages_count_params)
+    render json: builder.build
+  end
+
   private
 
   def generate_csv(filename, template)
@@ -138,5 +143,13 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
 
   def conversation_metrics
     V2::ReportBuilder.new(Current.account, conversation_params).conversation_metrics
+  end
+
+  def outgoing_messages_count_params
+    {
+      group_by: params[:group_by],
+      since: params[:since],
+      until: params[:until]
+    }
   end
 end
