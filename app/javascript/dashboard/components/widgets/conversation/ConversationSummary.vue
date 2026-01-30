@@ -7,6 +7,8 @@ import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import TasksAPI from 'dashboard/api/captain/tasks';
 import Button from 'dashboard/components-next/button/Button.vue';
+import { useTrack } from 'dashboard/composables';
+import { CAPTAIN_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 
 const props = defineProps({
   chat: {
@@ -74,6 +76,10 @@ const toggleSummary = async () => {
     return;
   }
   isExpanded.value = true;
+  useTrack(CAPTAIN_EVENTS.SUMMARIZE_USED, {
+    conversationId: props.chat.id,
+    uiFrom: 'conversation_list',
+  });
   // Only fetch if no cached summary
   if (!cachedSummary.value && !error.value) {
     await fetchSummary();

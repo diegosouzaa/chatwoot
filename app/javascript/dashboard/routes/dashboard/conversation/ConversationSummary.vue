@@ -8,6 +8,8 @@ import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import TasksAPI from 'dashboard/api/captain/tasks';
 import Button from 'dashboard/components-next/button/Button.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+import { useTrack } from 'dashboard/composables';
+import { CAPTAIN_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 
 const props = defineProps({
   conversationId: {
@@ -34,6 +36,7 @@ const cachedSummaryAt = computed(
   () => currentChat.value?.cached_summary_at || 0
 );
 const lastActivityAt = computed(() => currentChat.value?.last_activity_at || 0);
+const uiFrom = 'conversation_sidebar';
 
 const isStale = computed(() => {
   if (!cachedSummaryAt.value) return true;
@@ -77,7 +80,28 @@ const fetchSummary = async (forceRegenerate = false) => {
   }
 };
 
-const regenerate = () => fetchSummary(true);
+const trackSummary = action => {
+  useTrack(CAPTAIN_EVENTS.SUMMARIZE_USED, {
+    conversationId: props.conversationId,
+    uiFrom,
+    action,
+  });
+};
+
+const generateSummary = () => {
+  trackSummary('generate');
+  return fetchSummary(false);
+};
+
+const regenerate = () => {
+  trackSummary('regenerate');
+  return fetchSummary(true);
+};
+
+const retryGenerate = () => {
+  trackSummary('retry');
+  return fetchSummary(true);
+};
 
 watch(
   () => props.conversationId,
@@ -107,7 +131,7 @@ defineExpose({
         size="sm"
         variant="link"
         class="ml-2"
-        @click="() => fetchSummary(true)"
+        @click="retryGenerate"
       />
     </div>
 
@@ -119,7 +143,7 @@ defineExpose({
         :label="t('CONVERSATION_SIDEBAR.SUMMARY.GENERATE')"
         icon="i-material-symbols-auto-awesome"
         size="sm"
-        @click="() => fetchSummary(false)"
+        @click="generateSummary"
       />
     </div>
 
