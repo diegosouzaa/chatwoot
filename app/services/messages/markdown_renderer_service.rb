@@ -9,7 +9,8 @@ class Messages::MarkdownRendererService
     'Channel::Line' => :render_line,
     'Channel::TwitterProfile' => :render_plain_text,
     'Channel::Sms' => :render_plain_text,
-    'Channel::TwilioSms' => :render_plain_text
+    'Channel::TwilioSms' => :render_plain_text,
+    'Channel::Api' => :render_api_message
   }.freeze
 
   def initialize(content, channel_type, channel = nil)
@@ -54,6 +55,11 @@ class Messages::MarkdownRendererService
     doc = CommonMarker.render_doc(content_with_preserved_newlines, [:STRIKETHROUGH_DOUBLE_TILDE], [:strikethrough])
     result = renderer.render(doc).gsub(/\n+\z/, '')
     restore_multiple_newlines(result)
+  end
+
+  def render_api_message
+    # Convert literal \n strings to actual newlines for API channel messages
+    @content.gsub('\\n', "\n")
   end
 
   def render_whatsapp

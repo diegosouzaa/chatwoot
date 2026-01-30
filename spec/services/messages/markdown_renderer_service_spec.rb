@@ -493,6 +493,31 @@ RSpec.describe Messages::MarkdownRendererService, type: :service do
         result = described_class.new(content, channel_type).render
         expect(result).to eq("- Item 1\n- Item 2")
       end
+
+      it 'converts literal \\n strings to actual newlines' do
+        content = 'Hi \\ntext message \\nwith line \\nbreak'
+        result = described_class.new(content, channel_type).render
+        expect(result).to eq("Hi \ntext message \nwith line \nbreak")
+      end
+
+      it 'handles multiple literal \\n in sequence' do
+        content = 'Line 1\\n\\n\\nLine 2'
+        result = described_class.new(content, channel_type).render
+        expect(result).to eq("Line 1\n\n\nLine 2")
+      end
+
+      it 'preserves markdown formatting while converting \\n' do
+        content = '**bold**\\n_italic_\\n`code`'
+        result = described_class.new(content, channel_type).render
+        expect(result).to eq("**bold**\n_italic_\n`code`")
+      end
+
+      it 'handles real-world API payload with literal \\n strings' do
+        content = 'Hi \\ntext message \\nwith line \\nbreak'
+        result = described_class.new(content, channel_type).render
+        expect(result).to eq("Hi \ntext message \nwith line \nbreak")
+        expect(result).not_to include('\\n')
+      end
     end
 
     context 'when channel is Channel::TwitterProfile' do
