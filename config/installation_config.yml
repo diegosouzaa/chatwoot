@@ -179,7 +179,7 @@
   type: secret
 - name: CAPTAIN_OPEN_AI_MODEL
   display_title: 'OpenAI Model'
-  description: 'The OpenAI model configured for use in Captain AI. Default: gpt-4o-mini'
+  description: 'The OpenAI model configured for use in Captain AI. Default: gpt-4.1-mini'
   locked: false
 - name: CAPTAIN_OPEN_AI_ENDPOINT
   display_title: 'OpenAI API Endpoint (optional)'
@@ -407,6 +407,11 @@
 # ------- End of Instagram Channel Related Config ------- #
 
 # ------- TikTok Channel Related Config ------- #
+- name: TIKTOK_API_VERSION
+  display_title: 'TikTok API Version'
+  description: 'Configure this if you want to use a different TikTok API version. Make sure its prefixed with `v`'
+  value: 'v1.3'
+  locked: false
 - name: TIKTOK_APP_ID
   display_title: 'TikTok App ID'
   locked: false
