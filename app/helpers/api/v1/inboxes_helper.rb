@@ -73,32 +73,17 @@ module Api::V1::InboxesHelper
 
   def set_smtp_encryption(channel_data, smtp)
     if channel_data[:smtp_enable_ssl_tls]
-      set_enable_tls(channel_data, smtp)
+      set_smtp_ssl_method(smtp, :enable_tls, channel_data[:smtp_openssl_verify_mode])
     elsif channel_data[:smtp_enable_starttls_auto]
-      set_enable_starttls_auto(channel_data, smtp)
+      set_smtp_ssl_method(smtp, :enable_starttls_auto, channel_data[:smtp_openssl_verify_mode])
     end
   end
 
-  def set_enable_starttls_auto(channel_data, smtp)
-    return unless smtp.respond_to?(:enable_starttls_auto)
+  def set_smtp_ssl_method(smtp, method, openssl_verify_mode)
+    return unless smtp.respond_to?(method)
 
-    if channel_data[:smtp_openssl_verify_mode]
-      context = enable_openssl_mode(channel_data[:smtp_openssl_verify_mode])
-      smtp.enable_starttls_auto(context)
-    else
-      smtp.enable_starttls_auto
-    end
-  end
-
-  def set_enable_tls(channel_data, smtp)
-    return unless smtp.respond_to?(:enable_tls)
-
-    if channel_data[:smtp_openssl_verify_mode]
-      context = enable_openssl_mode(channel_data[:smtp_openssl_verify_mode])
-      smtp.enable_tls(context)
-    else
-      smtp.enable_tls
-    end
+    context = enable_openssl_mode(openssl_verify_mode) if openssl_verify_mode
+    context ? smtp.send(method, context) : smtp.send(method)
   end
 
   def enable_openssl_mode(smtp_openssl_verify_mode)
