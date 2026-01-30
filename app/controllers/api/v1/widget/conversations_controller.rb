@@ -37,13 +37,7 @@ class Api::V1::Widget::ConversationsController < Api::V1::Widget::BaseController
   def transcript
     return head :too_many_requests unless conversation.present? && conversation.account.within_email_rate_limit?
 
-    if conversation.contact.present? && conversation.contact.email.present?
-      ConversationReplyMailer.with(account: conversation.account).conversation_transcript(
-        conversation,
-        conversation.contact.email
-      )&.deliver_later
-      conversation.account.increment_email_sent_count
-    end
+    send_transcript_email
     head :ok
   end
 
@@ -79,6 +73,16 @@ class Api::V1::Widget::ConversationsController < Api::V1::Widget::BaseController
   end
 
   private
+
+  def send_transcript_email
+    return if conversation.contact&.email.blank?
+
+    ConversationReplyMailer.with(account: conversation.account).conversation_transcript(
+      conversation,
+      conversation.contact.email
+    )&.deliver_later
+    conversation.account.increment_email_sent_count
+  end
 
   def trigger_typing_event(event)
     Rails.configuration.dispatcher.dispatch(event, Time.zone.now, conversation: conversation, user: @contact)
